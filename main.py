@@ -5,8 +5,14 @@ from pathlib import Path
 from typing import List, Tuple
 import sublime
 
+# Constants
+class Config:
+    DEFAULT_RULES_PATH = "./sublime-rules/detection-rules/" # Don't change this path
+    DEFAULT_EML_ROOT_PATH = "./dataset/eml" # Please change your raw eml file path
+    DEFAULT_CSV_FILENAME = "./dataset/email_analysis_results.csv" # Please change csv path you want
+
 class EmailAnalyzer:
-    def __init__(self, rules_path: str = "./sublime-rules/detection-rules/"):
+    def __init__(self, rules_path: str = Config.DEFAULT_RULES_PATH):
         try:
             self.sublime_client = sublime.Sublime()
             self.rules, self.queries = sublime.util.load_yml_path(rules_path)
@@ -36,7 +42,7 @@ class EmailAnalyzer:
             print(f"Error processing {eml_path}: {e}")
             return False, []
 
-    def save_results_to_csv(self, results: List[List], filename: str = "email_analysis_results.csv") -> None:
+    def save_results_to_csv(self, results: List[List], filename: str = Config.DEFAULT_CSV_FILENAME) -> None:
         try:
             with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
                 writer = csv.writer(csvfile)
@@ -46,8 +52,8 @@ class EmailAnalyzer:
         except Exception as e:
             print(f"Error saving CSV: {e}")
     
-    def analyze_directory(self, eml_root_path: str = "./dataset/eml", 
-                         csv_filename: str = "email_analysis_results.csv") -> None:
+    def analyze_directory(self, eml_root_path: str = Config.DEFAULT_EML_ROOT_PATH, 
+                         csv_filename: str = Config.DEFAULT_CSV_FILENAME) -> None:
         try:
             root_path = Path(eml_root_path)
             if not root_path.exists():
