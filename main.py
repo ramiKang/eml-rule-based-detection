@@ -70,8 +70,6 @@ class EmailAnalyzer:
             with open(eml_path,"rb") as f:
                 analysis = self.total_virus_client.scan_file(f, wait_for_completion=True)
 
-            self.total_virus_client.close()
-
             # 3. Post-Processing of total virus's analysis
             # 3-1. Check if the results attribute exist in the analysis
             if not hasattr(analysis, 'results'):
@@ -81,7 +79,7 @@ class EmailAnalyzer:
             # 3-2. Extract rules matched by the rule-based detection
             malicious_result_list = [item for item in analysis.results.values() if item.get("category") == "malicious"]
 
-            # 3-3. Convert the return formath
+            # 3-3. Convert the return format
             is_malicious = len(malicious_result_list) > 0
             malicious_engine_result_list = [item["result"] for item in malicious_result_list]
 
@@ -102,7 +100,7 @@ class EmailAnalyzer:
                 "Virustotal Detail": "detail_virustotal",
             }
 
-            # 2. Setup csv hader
+            # 2. Setup csv header
             csv_header = ["filename"]
 
             if self.is_execute_sublime:
@@ -228,7 +226,6 @@ class EmailAnalyzer:
 def main():
     load_dotenv()
 
-    """Main function to run email analysis."""
     analyzer = EmailAnalyzer(is_execute_virustotal=False)
     analyzer.analyze_directory()
 
