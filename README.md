@@ -1,6 +1,6 @@
 # Email Security Analysis Tool
 
-이메일 보안 분석 도구로 Sublime Security 규칙을 사용하여 피싱 및 악성 이메일을 탐지합니다.
+Sublime과 VirusTotal API를 통해 EML 파일 분석
 
 ## 설치 및 실행
 
@@ -19,7 +19,12 @@ cd <project-directory>
 git clone https://github.com/sublime-security/sublime-rules.git
 ```
 
-### 4. 설정 변경
+### 4. Execute Requirements.txt
+```bash
+pip install -r requirements.txt
+```
+
+### 5. 설정 변경
 `main.py` 파일의 `Config` 클래스에서 경로를 적절히 수정하세요:
 
 ```python
@@ -32,7 +37,7 @@ class Config:
 - `DEFAULT_EML_ROOT_PATH`: 분석할 EML 파일들이 있는 디렉토리 경로
 - `DEFAULT_CSV_FILENAME`: 결과를 저장할 CSV 파일 경로
 
-### 5. 실행
+### 6. 실행
 ```bash
 python main.py
 ```
