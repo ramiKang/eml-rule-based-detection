@@ -1,0 +1,3 @@
+sublime-cli
+vt-py
+python-dotenv
