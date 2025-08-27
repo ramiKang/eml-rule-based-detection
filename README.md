@@ -6,7 +6,7 @@ Sublime과 VirusTotal API를 통해 EML 파일 분석
 
 ### 1. 프로젝트 Clone
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/ramiKang/eml-rule-based-detection.git
 ```
 
 ### 2. 프로젝트 디렉토리로 이동
